@@ -4,6 +4,7 @@
   "parameters": {
     "virtualNetworkName": {
       "type": "string",
+      "defaultValue": "vnet1",
       "metadata": {
         "description": "virtual network name"
       }
@@ -26,8 +27,7 @@
     "defaultSubnetName": "defaultSubnet",
     "firewallName": "firewall1",
     "publicIPName": "publicIP1",
-    "vnetName": "vnet1",
-    "azureFirewallSubnetId":  "[resourceId('Microsoft.Network/virtualNetworks/subnets',variables('vnetName'), variables('azureFirewallSubnetName'))]",
+    "azureFirewallSubnetId":  "[resourceId('Microsoft.Network/virtualNetworks/subnets/',parameters('virtualNetworkName'), variables('azureFirewallSubnetName'))]",
     "azureFirewallPublicIpId": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPName'))]"
   },
   "resources": [
@@ -87,7 +87,6 @@
       "location": "[parameters('location')]",
       "dependsOn": [
         "[concat('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'))]",
-        "[concat('Microsoft.Network/virtualNetworks/subnets', variables('azureFirewallSubnetName'))]",
         "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPName'))]"
       ],
       "properties": {
