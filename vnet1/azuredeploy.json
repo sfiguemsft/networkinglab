@@ -54,7 +54,7 @@
           {
             "name": "[variables('serversSubnetName')]",
             "properties": {
-              "addressPrefix": "[variables('serversSubnetPrefix')]",
+              "addressPrefix": "[variables('serversSubnetPrefix')]"
             }
           },
           {
