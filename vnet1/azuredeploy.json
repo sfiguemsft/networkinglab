@@ -121,20 +121,50 @@
         "networkRuleCollections": [
           {
             "name": "netRc1",
-            "properties": {                    
-              "priority": 200,
-              "action":  { "type":  "Allow"},
-              "rules": [
-                {
-                  "name": "netRule1",
-                  "protocols": ["TCP"],
-                  "sourceAddresses": ["192.168.2.0/24"],
-                  "destinationAddresses": ["*"],
-                  "destinationPorts": ["8000-8999"]
-                }
-              ]
+            "properties": {
+                "provisioningState": "Succeeded",
+                "priority": 100,
+                "action": {
+                    "type": "Dnat"
+                },
+                "rules": [
+                    {
+                        "name": "web1",
+                        "protocols": [
+                            "TCP"
+                        ],
+                        "translatedAddress": "10.51.242.100",
+                        "translatedPort": "3389",
+                        "sourceAddresses": [
+                            "*"
+                        ],
+                        "destinationAddresses": [
+                          "[variables('azureFirewallPublicIpId')]"
+                        ],
+                        "destinationPorts": [
+                            "3389"
+                        ]
+                    },
+                    {
+                        "name": "web2",
+                        "protocols": [
+                            "TCP"
+                        ],
+                        "translatedAddress": "10.51.242.101",
+                        "translatedPort": "3389",
+                        "sourceAddresses": [
+                            "*"
+                        ],
+                        "destinationAddresses": [
+                          "[variables('azureFirewallPublicIpId')]"
+                        ],
+                        "destinationPorts": [
+                            "3390"
+                        ]
+                    }
+                ]
             }
-          }
+        }
         ]
       }
     }
