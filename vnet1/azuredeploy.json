@@ -26,7 +26,7 @@
     "defaultSubnetName": "defaultSubnet",
     "firewallName": "firewall1",
     "publicIPName": "publicIP1",
-    "azureFirewallSubnetId":  "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), variables('azureFirewallSubnetName'))]",
+    "azureFirewallSubnetId":  "[concat(resourceId('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName')), '/subnets/', variables('azureFirewallSubnetName'))]",
     "azureFirewallPublicIpId": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPName'))]"
   },
   "resources": [
