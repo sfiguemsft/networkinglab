@@ -20,7 +20,6 @@
   "variables": {
     "vnetAddressPrefix": "10.51.241.0/27", 
     "serversSubnetPrefix": "10.51.241.32/27",
-    "defaultSubnetPrefix": "10.51.241.0/27",
     "azureFirewallSubnetPrefix": "10.51.241.192/26",
     "azureFirewallSubnetName": "AzureFirewallSubnet",
     "serversSubnetName": "ServersSubnet",
@@ -56,12 +55,6 @@
             "name": "[variables('serversSubnetName')]",
             "properties": {
               "addressPrefix": "[variables('serversSubnetPrefix')]"
-            }
-          },
-          {
-            "name": "[variables('defaultSubnetName')]",
-            "properties": {
-              "addressPrefix": "[variables('defaultSubnetPrefix')]"
             }
           }
         ]
