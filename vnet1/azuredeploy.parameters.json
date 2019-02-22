@@ -4,12 +4,6 @@
     "parameters": {
       "virtualNetworkName": {
         "value": "GEN-UNIQUE"
-      },
-      "adminUsername": {
-        "value": "GEN-USER"
-      },
-      "adminPassword": {
-        "value": "GEN-PASSWORD"
       }
     }
   }
