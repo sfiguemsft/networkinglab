@@ -14,7 +14,7 @@ D"https://github.com/tjanczuk/iisnode/releases/download/v0.2.21/iisnode-full-v0.
 $output3 = "D:\iisnode.msi"
 Invoke-WebRequest -Uri $url3 -OutFile $output3
 
-$url4 = ""https://go.microsoft.com/fwlink/?LinkId=708343""
+$url4 = "https://go.microsoft.com/fwlink/?LinkId=708343"
 $output4 = "D:\storageexplorer.exe"
 Invoke-WebRequest -Uri $url4 -OutFile $output4
 
