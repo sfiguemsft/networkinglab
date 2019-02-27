@@ -37,18 +37,15 @@
     },
     "virtualNetworkName": {
       "type": "string",
-      "value": "GEN-PASSWORD",
-      "defaultValue": ""
+      "defaultValue": "vnet"
     },
     "subnetName": {
       "type": "string",
-      "value": "GEN-PASSWORD",
-      "defaultValue": ""
+      "defaultValue": "subnet"
     },
     "vmName": {
       "type": "string",
-      "value": "GEN-PASSWORD",
-      "defaultValue": ""
+      "defaultValue": "vm"
     }
   },
   "variables": {
