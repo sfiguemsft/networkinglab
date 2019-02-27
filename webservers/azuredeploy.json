@@ -36,16 +36,13 @@
       }
     },
     "virtualNetworkName": {
-      "type": "string",
-      "defaultValue": "vnet"
+      "type": "string"
     },
     "subnetName": {
-      "type": "string",
-      "defaultValue": "subnet"
+      "type": "string"
     },
     "vmName": {
-      "type": "string",
-      "defaultValue": "vm"
+      "type": "string"
     }
   },
   "variables": {
