@@ -52,7 +52,7 @@
     }
   },
   "variables": {
-    "nicName": "myVMNic",
+    "nicName": "[concat('Nic', parameters('vmName'))]",
     "subnetRef": "[resourceId(parameters('existingVnetResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnetName'))]",
     "publicIPAddressName": "[concat('IP', parameters('vmName'))]",
     "scriptFolder": ".",
