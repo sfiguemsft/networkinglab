@@ -19,7 +19,7 @@
       "metadata": {
         "description": "The base URI where artifacts required by this template are located. When the template is deployed using the accompanying scripts, a private location in the subscription will be used and this value will be automatically generated."
       },
-      "defaultValue": "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/201-vm-custom-script-windows"
+      "defaultValue": "https://raw.githubusercontent.com/sfiguemsft/networkinglab/master/webservers/scripts"
     },
     "_artifactsLocationSasToken": {
       "type": "securestring",
@@ -34,20 +34,30 @@
       "metadata": {
         "description": "Location for all resources."
       }
+    },
+    "virtualNetworkName": {
+      "type": "string",
+      "value": "GEN-PASSWORD",
+      "defaultValue": ""
+    },
+    "subnetName": {
+      "type": "string",
+      "value": "GEN-PASSWORD",
+      "defaultValue": ""
+    },
+    "vmName": {
+      "type": "string",
+      "value": "GEN-PASSWORD",
+      "defaultValue": ""
     }
   },
   "variables": {
     "nicName": "myVMNic",
-    "addressPrefix": "10.0.0.0/16",
-    "subnetName": "Subnet",
-    "subnetPrefix": "10.0.0.0/24",
-    "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
-    "vmName": "MyVM",
-    "virtualNetworkName": "MyVNET",
-    "publicIPAddressName": "myPublicIP",
+    "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnetName'))]",
+    "publicIPAddressName": "[concat('-myPublicIP ', parameters('vmName'))]",
     "dnsNameForPublicIP": "[uniqueString(resourceGroup().id)]",
     "scriptFolder": ".",
-    "scriptFileName": "Copy-FileFromAzure.ps1",
+    "scriptFileName": "setup.ps1",
     "fileToBeCopied": "FileToBeCopied.txt",
     "scriptParameters": "[concat('-artifactsLocation ', parameters('_artifactsLocation'), ' -artifactsLocationSasToken \"', parameters('_artifactsLocationSasToken'), '\" -folderName ', variables('scriptFolder'), ' -fileToInstall ', variables('fileToBeCopied'))]"
   },
@@ -66,33 +76,12 @@
     },
     {
       "apiVersion": "2018-04-01",
-      "type": "Microsoft.Network/virtualNetworks",
-      "name": "[variables('virtualNetworkName')]",
-      "location": "[parameters('location')]",
-      "properties": {
-        "addressSpace": {
-          "addressPrefixes": [
-            "[variables('addressPrefix')]"
-          ]
-        },
-        "subnets": [
-          {
-            "name": "[variables('subnetName')]",
-            "properties": {
-              "addressPrefix": "[variables('subnetPrefix')]"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "apiVersion": "2018-04-01",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('nicName')]",
       "location": "[parameters('location')]",
       "dependsOn": [
         "[variables('publicIPAddressName')]",
-        "[variables('virtualNetworkName')]"
+        "[parameters('virtualNetworkName')]"
       ],
       "properties": {
         "ipConfigurations": [
@@ -114,7 +103,7 @@
     {
       "apiVersion": "2018-04-01",
       "type": "Microsoft.Compute/virtualMachines",
-      "name": "[variables('vmName')]",
+      "name": "[parameters('vmName')]",
       "location": "[parameters('location')]",
       "dependsOn": [
         "[variables('nicName')]"
@@ -124,7 +113,7 @@
           "vmSize": "Standard_D1_v2"
         },
         "osProfile": {
-          "computerName": "[variables('vmName')]",
+          "computerName": "[parameters('vmName')]",
           "adminUsername": "[parameters('adminUsername')]",
           "adminPassword": "[parameters('adminPassword')]"
         },
@@ -154,7 +143,7 @@
           "apiVersion": "2017-03-30",
           "location": "[parameters('location')]",
           "dependsOn": [
-            "[variables('vmName')]"
+            "[parameters('vmName')]"
           ],
           "properties": {
             "publisher": "Microsoft.Compute",
