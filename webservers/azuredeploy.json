@@ -54,7 +54,7 @@
   "variables": {
     "nicName": "myVMNic",
     "subnetRef": "[resourceId(parameters('existingVnetResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnetName'))]",
-    "publicIPAddressName": "[concat('-myPublicIP ', parameters('vmName'))]",
+    "publicIPAddressName": "[concat('-IP ', parameters('vmName'))]",
     "dnsNameForPublicIP": "[uniqueString(resourceGroup().id)]",
     "scriptFolder": ".",
     "scriptFileName": "setup.ps1",
