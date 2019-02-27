@@ -25,7 +25,6 @@ Invoke-WebRequest -Uri $setup -OutFile $output
 Start-Process msiexec.exe -Wait -ArgumentList '/I D:\iisnode.msi /quiet' 
 Start-Process msiexec.exe -Wait -ArgumentList '/I D:\rewrite.msi /quiet'
 Start-Process msiexec.exe -Wait -ArgumentList '/I D:\node.msi /quiet'
-Start-Process -FilePath "D:\storageExplorer.exe" -ArgumentList "/silent" 
 
 $urlapplicationHost = "https://raw.githubusercontent.com/sfiguemsft/networkinglab/master/webservers/files/applicationHost.config"
 $config = "C:\Windows\system32\inetsrv\config\applicationHost.config"
@@ -48,3 +47,5 @@ $text = (Get-Content -Path $oldfile -ReadCount 0)
 $text -replace 'CHANGEME.database.windows.net','test.database.windows.net' | Set-Content -Path $newfile -Force
 
 & "iisreset"
+
+Start-Process -FilePath "D:\storageExplorer.exe" -ArgumentList "/silent" 
