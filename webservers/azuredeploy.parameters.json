@@ -8,6 +8,9 @@
       "adminPassword": {
           "value": "GEN-PASSWORD"
       },
+      "existingVnetResourceGroupName": {
+        "value": ""
+      },
       "vnet": {
           "value": ""
       },

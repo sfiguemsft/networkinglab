@@ -35,6 +35,12 @@
         "description": "Location for all resources."
       }
     },
+    "existingVnetResourceGroupName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the resourceGroup for the existing virtual network to deploy the scale set into."
+      }
+    },
     "virtualNetworkName": {
       "type": "string"
     },
@@ -47,7 +53,7 @@
   },
   "variables": {
     "nicName": "myVMNic",
-    "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnetName'))]",
+    "subnetRef": "[resourceId(parameters('existingVnetResourceGroupName'), 'Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), parameters('subnetName'))]",
     "publicIPAddressName": "[concat('-myPublicIP ', parameters('vmName'))]",
     "dnsNameForPublicIP": "[uniqueString(resourceGroup().id)]",
     "scriptFolder": ".",
