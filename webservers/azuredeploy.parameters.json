@@ -9,10 +9,10 @@
           "value": "GEN-PASSWORD"
       },
       "vnet": {
-          "value": "GEN-PASSWORD"
+          "value": ""
       },
       "subnet": {
-          "value": "GEN-PASSWORD"
+          "value": ""
       }
  }
 }
