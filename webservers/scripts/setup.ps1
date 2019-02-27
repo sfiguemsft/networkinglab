@@ -10,7 +10,7 @@ $url2 = "https://nodejs.org/dist/v8.11.3/node-v8.11.3-x64.msi"
 $output2 = "D:\node.msi"
 Invoke-WebRequest -Uri $url2 -OutFile $output2
 
-D"https://github.com/tjanczuk/iisnode/releases/download/v0.2.21/iisnode-full-v0.2.21-x64.msi"
+$url3="https://github.com/tjanczuk/iisnode/releases/download/v0.2.21/iisnode-full-v0.2.21-x64.msi"
 $output3 = "D:\iisnode.msi"
 Invoke-WebRequest -Uri $url3 -OutFile $output3
 
@@ -25,6 +25,8 @@ Invoke-WebRequest -Uri $setup -OutFile $output
 Start-Process msiexec.exe -Wait -ArgumentList '/I D:\iisnode.msi /quiet' 
 Start-Process msiexec.exe -Wait -ArgumentList '/I D:\rewrite.msi /quiet'
 Start-Process msiexec.exe -Wait -ArgumentList '/I D:\node.msi /quiet'
+
+Start-Process -FilePath "D:\storageExplorer.exe" -ArgumentList "/silent" 
 
 $urlapplicationHost = "https://raw.githubusercontent.com/sfiguemsft/networkinglab/master/webservers/files/applicationHost.config"
 $config = "C:\Windows\system32\inetsrv\config\applicationHost.config"
@@ -47,5 +49,3 @@ $text = (Get-Content -Path $oldfile -ReadCount 0)
 $text -replace 'CHANGEME.database.windows.net','test.database.windows.net' | Set-Content -Path $newfile -Force
 
 & "iisreset"
-
-Start-Process -FilePath "D:\storageExplorer.exe" -ArgumentList "/silent" 
