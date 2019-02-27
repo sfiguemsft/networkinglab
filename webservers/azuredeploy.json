@@ -77,8 +77,7 @@
       "name": "[variables('nicName')]",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[variables('publicIPAddressName')]",
-        "[parameters('virtualNetworkName')]"
+        "[variables('publicIPAddressName')]"
       ],
       "properties": {
         "ipConfigurations": [
