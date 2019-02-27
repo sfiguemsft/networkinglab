@@ -10,9 +10,13 @@ $url2 = "https://nodejs.org/dist/v8.11.3/node-v8.11.3-x64.msi"
 $output2 = "D:\node.msi"
 Invoke-WebRequest -Uri $url2 -OutFile $output2
 
-$url3 = "https://github.com/tjanczuk/iisnode/releases/download/v0.2.21/iisnode-full-v0.2.21-x64.msi"
+D"https://github.com/tjanczuk/iisnode/releases/download/v0.2.21/iisnode-full-v0.2.21-x64.msi"
 $output3 = "D:\iisnode.msi"
 Invoke-WebRequest -Uri $url3 -OutFile $output3
+
+$url4 = ""https://go.microsoft.com/fwlink/?LinkId=708343""
+$output4 = "D:\storageexplorer.exe"
+Invoke-WebRequest -Uri $url4 -OutFile $output4
 
 $setup = "https://raw.githubusercontent.com/sfiguemsft/networkinglab/master/webservers/scripts/setup.ps1"
 $output = "D:\setupNode.ps1"
