@@ -62,16 +62,19 @@
   },
   "resources": [
     {
-      "apiVersion": "2017-06-01",
       "type": "Microsoft.Network/publicIPAddresses",
+      "sku": {
+          "name": "Standard"
+      },
       "name": "[variables('publicIPAddressName')]",
+      "apiVersion": "2018-08-01",
       "location": "[parameters('location')]",
       "properties": {
-        "publicIPAllocationMethod": "Dynamic"
+          "publicIPAllocationMethod": "Dynamic"
       }
     },
     {
-      "apiVersion": "2018-04-01",
+      "apiVersion": "2018-08-01",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('nicName')]",
       "location": "[parameters('location')]",
