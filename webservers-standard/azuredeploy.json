@@ -49,32 +49,6 @@
     },
     "vmName": {
       "type": "string"
-    },
-    "name": {
-        "type": "string"
-    },
-    "location": {
-        "type": "string"
-    },
-    "sku": {
-        "type": "string",
-        "allowedValues": [
-            "Basic",
-            "Standard"
-        ]
-    },
-    "publicIPAllocationMethod": {
-        "type": "string",
-        "allowedValues": [
-            "Dynamic",
-            "Static"
-        ]
-    },
-    "idleTimeoutInMinutes": {
-        "type": "int"
-    },
-    "publicIpAddressVersion": {
-        "type": "string"
     }
   },
   "variables": {
@@ -125,66 +99,6 @@
           }
         ]
       }
-    },
-    {
-      "apiVersion": "2018-04-01",
-      "type": "Microsoft.Compute/virtualMachines",
-      "name": "[parameters('vmName')]",
-      "location": "[parameters('location')]",
-      "dependsOn": [
-        "[variables('nicName')]"
-      ],
-      "properties": {
-        "hardwareProfile": {
-          "vmSize": "Standard_D1_v2"
-        },
-        "osProfile": {
-          "computerName": "[parameters('vmName')]",
-          "adminUsername": "[parameters('adminUsername')]",
-          "adminPassword": "[parameters('adminPassword')]"
-        },
-        "storageProfile": {
-          "imageReference": {
-            "publisher": "MicrosoftWindowsServer",
-            "offer": "WindowsServer",
-            "sku": "2016-Datacenter",
-            "version": "latest"
-          },
-          "osDisk": {
-            "createOption": "FromImage"
-          }
-        },
-        "networkProfile": {
-          "networkInterfaces": [
-            {
-              "id": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicName'))]"
-            }
-          ]
-        }
-      },
-      "resources": [
-        {
-          "type": "extensions",
-          "name": "CustomScriptExtension",
-          "apiVersion": "2017-03-30",
-          "location": "[parameters('location')]",
-          "dependsOn": [
-            "[parameters('vmName')]"
-          ],
-          "properties": {
-            "publisher": "Microsoft.Compute",
-            "type": "CustomScriptExtension",
-            "typeHandlerVersion": "1.8",
-            "autoUpgradeMinorVersion": true,
-            "settings": {
-              "fileUris": [
-                "[concat(parameters('_artifactsLocation'), '/', variables('ScriptFolder'), '/', variables('ScriptFileName'), parameters('_artifactsLocationSasToken'))]"
-              ],
-              "commandToExecute": "[concat('powershell -ExecutionPolicy Unrestricted -File ', variables('scriptFolder'), '/', variables('scriptFileName'), ' ', variables('scriptParameters'))]"
-            }
-          }
-        }
-      ]
     }
   ]
 }
