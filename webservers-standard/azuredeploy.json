@@ -49,6 +49,32 @@
     },
     "vmName": {
       "type": "string"
+    },
+    "name": {
+        "type": "string"
+    },
+    "location": {
+        "type": "string"
+    },
+    "sku": {
+        "type": "string",
+        "allowedValues": [
+            "Basic",
+            "Standard"
+        ]
+    },
+    "publicIPAllocationMethod": {
+        "type": "string",
+        "allowedValues": [
+            "Dynamic",
+            "Static"
+        ]
+    },
+    "idleTimeoutInMinutes": {
+        "type": "int"
+    },
+    "publicIpAddressVersion": {
+        "type": "string"
     }
   },
   "variables": {
@@ -62,12 +88,17 @@
   },
   "resources": [
     {
-      "apiVersion": "2017-06-01",
+      "apiVersion": "2018-08-01",
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[variables('publicIPAddressName')]",
       "location": "[parameters('location')]",
+      "sku": {
+          "name": "Standard"
+      },
       "properties": {
-        "publicIPAllocationMethod": "Dynamic"
+          "publicIPAllocationMethod": "Dynamic",
+          "idleTimeoutInMinutes": "15",
+          "publicIpAddressVersion": "IPv4"
       }
     },
     {
