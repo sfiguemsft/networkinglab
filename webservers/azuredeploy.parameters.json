@@ -16,6 +16,9 @@
       },
       "subnet": {
           "value": ""
+      },
+      "PulicIPAddressSKU": {
+        "value": ""
       }
  }
 }

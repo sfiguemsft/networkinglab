@@ -49,6 +49,14 @@
     },
     "vmName": {
       "type": "string"
+    },
+    "PulicIPAddressSKU": {
+      "type": "string",
+      "allowedValues": [
+        "Standard",
+        "Basic"
+      ],
+      "defaultValue": "Standard"
     }
   },
   "variables": {
@@ -67,7 +75,7 @@
       "name": "[variables('publicIPAddressName')]",
       "location": "[parameters('location')]",
       "sku": {
-        "name": "Standard"
+        "name": "[parameters('PulicIPAddressSKU')]"
       },
       "properties": {
         "publicIPAllocationMethod": "Static"
