@@ -57,7 +57,7 @@
     "publicIPAddressName": "[concat('IP', parameters('vmName'))]",
     "scriptFolder": ".",
     "scriptFileName": "setup.ps1",
-    "fileToBeCopied": "FileToBeCopied.txt",
+    "fileToBeCopied": "setup.ps1",
     "scriptParameters": "[concat('-artifactsLocation ', parameters('_artifactsLocation'), ' -artifactsLocationSasToken \"', parameters('_artifactsLocationSasToken'), '\" -folderName ', variables('scriptFolder'), ' -fileToInstall ', variables('fileToBeCopied'))]"
   },
   "resources": [
