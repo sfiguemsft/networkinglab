@@ -142,54 +142,7 @@
                 }
             }
         ],
-        "natRuleCollections": [
-            {
-                "name": "RDP",
-                "properties": {
-                    "provisioningState": "Succeeded",
-                    "priority": 100,
-                    "action": {
-                        "type": "Dnat"
-                    },
-                    "rules": [
-                        {
-                            "name": "RDPweb1",
-                            "protocols": [
-                                "TCP"
-                            ],
-                            "translatedAddress": "10.51.242.68",
-                            "translatedPort": "3389",
-                            "sourceAddresses": [
-                                "*"
-                            ],
-                            "destinationAddresses": [
-                                "*"
-                            ],
-                            "destinationPorts": [
-                                "3389"
-                            ]
-                        },
-                        {
-                            "name": "RDPweb2",
-                            "protocols": [
-                                "TCP"
-                            ],
-                            "translatedAddress": "10.51.242.69",
-                            "translatedPort": "3389",
-                            "sourceAddresses": [
-                                "*"
-                            ],
-                            "destinationAddresses": [
-                                "*"
-                            ],
-                            "destinationPorts": [
-                                "3390"
-                            ]
-                        }
-                    ]
-                }
-            }
-        ]
+        "natRuleCollections": []
       }
     }
   ]
