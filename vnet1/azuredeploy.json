@@ -163,7 +163,7 @@
                                 "*"
                             ],
                             "destinationAddresses": [
-                                "20.189.139.54"
+                                "*"
                             ],
                             "destinationPorts": [
                                 "3389"
@@ -180,7 +180,7 @@
                                 "*"
                             ],
                             "destinationAddresses": [
-                                "20.189.139.54"
+                                "*"
                             ],
                             "destinationPorts": [
                                 "3390"
