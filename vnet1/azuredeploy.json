@@ -23,7 +23,7 @@
     "azureFirewallSubnetPrefix": "10.51.241.64/26",
     "azureFirewallSubnetName": "AzureFirewallSubnet",
     "serversSubnetName": "AppServersSubnet",
-    "firewallName": "firewall1",
+    "firewallName": "fw1",
     "publicIPName": "publicIP1",
     "azureFirewallSubnetId":  "[concat(resourceId('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName')), '/subnets/AzureFirewallSubnet')]",
     "azureFirewallPublicIpId": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPName'))]"
@@ -73,7 +73,7 @@
       }
     }, 
     {
-      "apiVersion": "2018-06-01",
+      "apiVersion": "2018-07-01",
       "type": "Microsoft.Network/azureFirewalls",
       "name": "[variables('firewallName')]",
       "location": "[parameters('location')]",
