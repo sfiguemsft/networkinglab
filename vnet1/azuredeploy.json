@@ -18,12 +18,11 @@
     }
   },
   "variables": {
-    "vnetAddressPrefix": "10.51.241.0/27", 
-    "serversSubnetPrefix": "10.51.241.32/27",
-    "azureFirewallSubnetPrefix": "10.51.241.192/26",
+    "vnetAddressPrefix": "10.51.241.0/24", 
+    "serversSubnetPrefix": "10.51.241.128/26",
+    "azureFirewallSubnetPrefix": "10.51.241.64/26",
     "azureFirewallSubnetName": "AzureFirewallSubnet",
-    "serversSubnetName": "ServersSubnet",
-    "defaultSubnetName": "defaultSubnet",
+    "serversSubnetName": "AppServersSubnet",
     "firewallName": "firewall1",
     "publicIPName": "publicIP1",
     "azureFirewallSubnetId":  "[concat(resourceId('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName')), '/subnets/AzureFirewallSubnet')]",
@@ -96,69 +95,100 @@
             }
           }
         ],
+        "networkRuleCollections": [],
         "applicationRuleCollections": [
-          {
-            "name": "appRc1",
-            "properties": {
-              "priority": 101,
-              "action": {"type": "Allow"},
-              "rules": [
-                {
-                  "name": "appRule1",
-                  "protocols": [{"port": "80", "protocolType": "http"}, {"port": "443", "protocolType": "https"}],
-                  "targetUrls": ["*microsoft.com"]
-                }
-              ]
-            }
-          }
-        ],
-        "networkRuleCollections": [
-          {
-            "name": "netRc1",
-            "properties": {
-                "provisioningState": "Succeeded",
-                "priority": 100,
-                "action": {
-                    "type": "Dnat"
-                },
-                "rules": [
-                    {
-                        "name": "web1",
-                        "protocols": [
-                            "TCP"
-                        ],
-                        "translatedAddress": "10.51.242.100",
-                        "translatedPort": "3389",
-                        "sourceAddresses": [
-                            "*"
-                        ],
-                        "destinationAddresses": [
-                          "[variables('azureFirewallPublicIpId')]"
-                        ],
-                        "destinationPorts": [
-                            "3389"
-                        ]
+            {
+                "name": "Exfiltration",
+                "properties": {
+                    "provisioningState": "Succeeded",
+                    "priority": 100,
+                    "action": {
+                        "type": "Allow"
                     },
-                    {
-                        "name": "web2",
-                        "protocols": [
-                            "TCP"
-                        ],
-                        "translatedAddress": "10.51.242.101",
-                        "translatedPort": "3389",
-                        "sourceAddresses": [
-                            "*"
-                        ],
-                        "destinationAddresses": [
-                          "[variables('azureFirewallPublicIpId')]"
-                        ],
-                        "destinationPorts": [
-                            "3390"
-                        ]
-                    }
-                ]
+                    "rules": [
+                        {
+                            "name": "Logs",
+                            "protocols": [
+                                {
+                                    "protocolType": "Https",
+                                    "port": 443
+                                }
+                            ],
+                            "fqdnTags": [],
+                            "targetFqdns": [
+                                "exfiltrate.blob.core.windows.net"
+                            ],
+                            "sourceAddresses": [
+                                "10.51.242.0/24"
+                            ]
+                        },
+                        {
+                            "name": "Github",
+                            "protocols": [
+                                {
+                                    "protocolType": "Https",
+                                    "port": 443
+                                }
+                            ],
+                            "fqdnTags": [],
+                            "targetFqdns": [
+                                "raw.githubusercontent.com"
+                            ],
+                            "sourceAddresses": [
+                                "10.51.242.0/24"
+                            ]
+                        }
+                    ]
+                }
             }
-        }
+        ],
+        "natRuleCollections": [
+            {
+                "name": "RDP",
+                "properties": {
+                    "provisioningState": "Succeeded",
+                    "priority": 100,
+                    "action": {
+                        "type": "Dnat"
+                    },
+                    "rules": [
+                        {
+                            "name": "RDPweb1",
+                            "protocols": [
+                                "TCP"
+                            ],
+                            "translatedAddress": "10.51.242.68",
+                            "translatedPort": "3389",
+                            "sourceAddresses": [
+                                "*"
+                            ],
+                            "destinationAddresses": [
+                                "20.189.139.54"
+                            ],
+                            "destinationPorts": [
+                                "3389"
+                            ]
+                        },
+                        {
+                            "name": "RDPweb2",
+                            "protocols": [
+                                "TCP"
+                            ],
+                            "translatedAddress": "10.51.242.69",
+                            "translatedPort": "3389",
+                            "sourceAddresses": [
+                                "*"
+                            ],
+                            "destinationAddresses": [
+                                "20.189.139.54"
+                            ],
+                            "destinationPorts": [
+                                "3390"
+                            ]
+                        }
+                    ]
+                }
+            }
         ]
       }
     }
