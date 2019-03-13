@@ -56,7 +56,7 @@
         "Standard",
         "Basic"
       ],
-      "defaultValue": "Standard"
+      "defaultValue": "Basic"
     }
   },
   "variables": {
