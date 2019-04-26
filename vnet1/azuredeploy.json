@@ -22,7 +22,7 @@
     "serversSubnetPrefix": "10.51.241.128/26",
     "azureFirewallSubnetPrefix": "10.51.241.64/26",
     "azureFirewallSubnetName": "AzureFirewallSubnet",
-    "serversSubnetName": "AppServersSubnet",
+    "serversSubnetName": "ServersSubnet",
     "firewallName": "fw1",
     "publicIPName": "publicIP1",
     "azureFirewallSubnetId":  "[concat(resourceId('Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName')), '/subnets/AzureFirewallSubnet')]",
@@ -96,52 +96,7 @@
           }
         ],
         "networkRuleCollections": [],
-        "applicationRuleCollections": [
-            {
-                "name": "Exfiltration",
-                "properties": {
-                    "provisioningState": "Succeeded",
-                    "priority": 100,
-                    "action": {
-                        "type": "Allow"
-                    },
-                    "rules": [
-                        {
-                            "name": "Logs",
-                            "protocols": [
-                                {
-                                    "protocolType": "Https",
-                                    "port": 443
-                                }
-                            ],
-                            "fqdnTags": [],
-                            "targetFqdns": [
-                                "exfiltrate.blob.core.windows.net"
-                            ],
-                            "sourceAddresses": [
-                                "10.51.242.0/24"
-                            ]
-                        },
-                        {
-                            "name": "Github",
-                            "protocols": [
-                                {
-                                    "protocolType": "Https",
-                                    "port": 443
-                                }
-                            ],
-                            "fqdnTags": [],
-                            "targetFqdns": [
-                                "raw.githubusercontent.com"
-                            ],
-                            "sourceAddresses": [
-                                "10.51.242.0/24"
-                            ]
-                        }
-                    ]
-                }
-            }
-        ],
+        "applicationRuleCollections": [],
         "natRuleCollections": []
       }
     }
